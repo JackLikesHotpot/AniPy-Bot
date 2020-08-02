@@ -5,5 +5,6 @@ Features:
 - [x] Search anime by title/ID
 - [x] Search manga by title/ID
 - [x] Reverse image search anime by image link
-- [ ] Search user by name
+- [x] Search user by name
+- [ ] Display a user's favourites
 - [ ] Search ??? by ???
