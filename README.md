@@ -8,3 +8,4 @@ Features:
 - [x] Search user by name
 - [ ] Display a user's favourites
 - [ ] Search ??? by ???
+- [ ] Refactor code
