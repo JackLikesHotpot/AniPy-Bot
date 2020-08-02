@@ -144,6 +144,8 @@ def SearchUser():
                     }
             manga {
                 chaptersRead
+                meanScore
+                count
             }
         }
     }

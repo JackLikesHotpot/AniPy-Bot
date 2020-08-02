@@ -103,11 +103,11 @@ async def help(ctx):
     embed.add_field(name='!anime <title>', value="Search anime by title or ID.", inline=False)
     embed.add_field(name='!manga <title>', value="Search manga by title or ID.", inline=False)
     embed.add_field(name='!user <username>', value="Search up a user by their username.", inline=False)
+    embed.add_field(name='!reverse <image link>', value="Search an anime by a link to an image.", inline=False)
     await ctx.send(embed = embed)
 
 @client.command(aliases=['user', 'u'])
 async def userSearch(ctx, *, userName):
-    m = 0
     query = SearchUser()
     variables = GetUser(userName)
     if variables:
@@ -115,12 +115,50 @@ async def userSearch(ctx, *, userName):
         if not result:
             await ctx.send("There does not exist a user with a name of {}.".format(userName))
             return
-        for i in result["data"]["User"]["favourites"]["anime"]["nodes"]:
-            if m < 5:
-                await ctx.send(i["title"]["english"])
-                m += 1
-        #embed = Discord.embed(
 
-        #)
+        try:
+            desc = removeTags((result["data"]["User"]["about"]).replace("&quot;", '"'))
+        except:
+            desc = ""
+
+        embedUser = discord.Embed(
+            colour=discord.Colour.red(),
+            title=result["data"]["User"]["name"],
+            url=result["data"]["User"]["siteUrl"],
+            description=desc
+        )
+
+        embedAni = discord.Embed(
+            colour=discord.Colour.red(),
+            title=("{}'s Favourite Anime".format(result["data"]["User"]["name"]))
+        )
+
+        embedMan = discord.Embed(
+            colour=discord.Colour.red(),
+            title=("{}'s Favourite Manga".format(result["data"]["User"]["name"]))
+        )
+
+        embedUser.add_field(name = 'Total Anime', value=result["data"]["User"]["statistics"]["anime"]["count"], inline = True)
+        embedUser.add_field(name = 'Days Watched', value=round(int((result["data"]["User"]["statistics"]["anime"]["minutesWatched"])/1440), 1), inline = True)
+        embedUser.add_field(name = "Mean Score", value=result["data"]["User"]["statistics"]["anime"]["meanScore"], inline = True)
+
+        embedUser.add_field(name = "Total Manga", value=result["data"]["User"]["statistics"]["manga"]["count"], inline = True)
+        embedUser.add_field(name = "Chapters Read", value=result["data"]["User"]["statistics"]["manga"]["chaptersRead"], inline = True)
+        embedUser.add_field(name = "Mean Score", value=result["data"]["User"]["statistics"]["manga"]["meanScore"], inline = True)
+        embedUser.set_thumbnail(url=result["data"]["User"]["avatar"]["large"])
+        await ctx.send(embed=embedUser)
+
+        animeFav = ""
+        mangaFav = ""
+        for fav in result["data"]["User"]["favourites"]["anime"]["nodes"]:
+            animeFav += '{} ({})'.format(str(fav["title"]["romaji"]), str(fav["title"]["english"])) + "\n"
+        embedAni.add_field(name = "Anime", value=animeFav)
+
+        for fav in result["data"]["User"]["favourites"]["manga"]["nodes"]:
+            mangaFav += '{} ({})'.format(str(fav["title"]["romaji"]), str(fav["title"]["english"])) + "\n"
+        embedMan.add_field(name = "Manga", value=mangaFav)
+
+        #await ctx.send(embed=embedAni)
+        await ctx.send(embed=embedMan)
 
 client.run('')
