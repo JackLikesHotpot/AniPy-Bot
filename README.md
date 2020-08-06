@@ -6,6 +6,7 @@ Features:
 - [x] Search manga by title/ID
 - [x] Reverse image search anime by image link
 - [x] Search user by name
-- [ ] Display a user's favourites
+- [x] Display a user's favourites
+- [ ] Improve appearance of commands
 - [ ] Search ??? by ???
 - [ ] Refactor code
