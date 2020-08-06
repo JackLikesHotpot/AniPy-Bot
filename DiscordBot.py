@@ -130,12 +130,12 @@ async def userSearch(ctx, *, userName):
 
         embedAni = discord.Embed(
             colour=discord.Colour.red(),
-            title=("{}'s Favourite Anime".format(result["data"]["User"]["name"]))
+            #title=("{}'s Favourite Anime".format(result["data"]["User"]["name"]))
         )
 
         embedMan = discord.Embed(
             colour=discord.Colour.red(),
-            title=("{}'s Favourite Manga".format(result["data"]["User"]["name"]))
+            #title=("{}'s Favourite Manga".format(result["data"]["User"]["name"]))
         )
 
         embedUser.add_field(name = 'Total Anime', value=result["data"]["User"]["statistics"]["anime"]["count"], inline = True)
@@ -150,15 +150,26 @@ async def userSearch(ctx, *, userName):
 
         animeFav = ""
         mangaFav = ""
+        aniLimit = 0
+        manLimit = 0
+
         for fav in result["data"]["User"]["favourites"]["anime"]["nodes"]:
-            animeFav += '{} ({})'.format(str(fav["title"]["romaji"]), str(fav["title"]["english"])) + "\n"
-        embedAni.add_field(name = "Anime", value=animeFav)
+            if aniLimit == 10:
+                break
+            animeFav += '[{} ({})]({})'.format(str(fav["title"]["romaji"]), str(fav["title"]["english"]), fav["siteUrl"]) + "\n\n"
+            aniLimit += 1
+        embedAni.add_field(name = ("{}'s Favourite Anime".format(result["data"]["User"]["name"])), value=animeFav)
+        embedAni.set_thumbnail(url=result["data"]["User"]["avatar"]["large"])
 
         for fav in result["data"]["User"]["favourites"]["manga"]["nodes"]:
-            mangaFav += '{} ({})'.format(str(fav["title"]["romaji"]), str(fav["title"]["english"])) + "\n"
-        embedMan.add_field(name = "Manga", value=mangaFav)
+            if manLimit == 10:
+                break
+            mangaFav += '[{} ({})]({})'.format(str(fav["title"]["romaji"]), str(fav["title"]["english"]), fav["siteUrl"]) + "\n\n"
+            manLimit += 1
+        embedMan.add_field(name = ("{}'s Favourite Manga".format(result["data"]["User"]["name"])), value=mangaFav)
+        embedMan.set_thumbnail(url=result["data"]["User"]["avatar"]["large"])
 
-        #await ctx.send(embed=embedAni)
+        await ctx.send(embed=embedAni)
         await ctx.send(embed=embedMan)
 
 client.run('')

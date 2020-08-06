@@ -120,6 +120,7 @@ def SearchUser():
         favourites {                                #print out favourites
             anime {
                 nodes {
+                siteUrl
                     title {
                         romaji
                         english
@@ -128,6 +129,7 @@ def SearchUser():
             }
             manga {
                 nodes {
+                siteUrl
                     title {
                         romaji
                         english
