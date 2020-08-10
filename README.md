@@ -13,3 +13,8 @@ Features:
 - [ ] Improve appearance of commands
 - [ ] Search ??? by ???
 - [ ] Refactor code
+
+To Do:
+- [ ] Making this look good
+- [ ] Commands tab
+- [ ] 'How to run this locally' guide
