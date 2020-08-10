@@ -23,3 +23,9 @@ def GetByID(type, id):
         'id': id
     }
     return variables
+
+def GetByStudio(studioName):
+    variables = {
+        'search' : studioName
+    }
+    return variables
