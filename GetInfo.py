@@ -118,7 +118,7 @@ def SearchUser():
             large
         }
         favourites {                                #print out favourites
-            anime {
+            anime (perPage: 10) {
                 nodes {
                 siteUrl
                     title {
@@ -127,7 +127,7 @@ def SearchUser():
                     }
                 }
             }
-            manga {
+            manga (perPage: 10) {
                 nodes {
                 siteUrl
                     title {
@@ -152,5 +152,25 @@ def SearchUser():
         }
     }
     }
+    '''
+    return query
+
+def searchStudio():
+    query = '''
+    query ($search: String) {
+    Studio(search: $search) {
+        name
+        siteUrl
+        media (isMain: true, sort: POPULARITY_DESC, perPage: 10) {
+            nodes {
+                siteUrl
+                title {
+                    english
+                    romaji
+                }
+            }
+        }
+    }
+}
     '''
     return query
