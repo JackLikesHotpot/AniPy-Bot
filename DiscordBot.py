@@ -150,26 +150,41 @@ async def userSearch(ctx, *, userName):
 
         animeFav = ""
         mangaFav = ""
-        aniLimit = 0
-        manLimit = 0
 
         for fav in result["data"]["User"]["favourites"]["anime"]["nodes"]:
-            if aniLimit == 10:
-                break
-            animeFav += '[{} ({})]({})'.format(str(fav["title"]["romaji"]), str(fav["title"]["english"]), fav["siteUrl"]) + "\n\n"
-            aniLimit += 1
+            animeFav += '[{} ({})]({})'.format((fav["title"]["romaji"]), (fav["title"]["english"]), fav["siteUrl"]) + "\n\n"
         embedAni.add_field(name = ("{}'s Favourite Anime".format(result["data"]["User"]["name"])), value=animeFav)
         embedAni.set_thumbnail(url=result["data"]["User"]["avatar"]["large"])
 
         for fav in result["data"]["User"]["favourites"]["manga"]["nodes"]:
-            if manLimit == 10:
-                break
-            mangaFav += '[{} ({})]({})'.format(str(fav["title"]["romaji"]), str(fav["title"]["english"]), fav["siteUrl"]) + "\n\n"
-            manLimit += 1
+            mangaFav += '[{} ({})]({})'.format((fav["title"]["romaji"]), (fav["title"]["english"]), fav["siteUrl"]) + "\n\n"
         embedMan.add_field(name = ("{}'s Favourite Manga".format(result["data"]["User"]["name"])), value=mangaFav)
         embedMan.set_thumbnail(url=result["data"]["User"]["avatar"]["large"])
 
         await ctx.send(embed=embedAni)
         await ctx.send(embed=embedMan)
+
+@client.command(aliases=['studio', 's'])
+async def studioSearch(ctx, *, studioName):
+    query = searchStudio()
+    variables = GetByStudio(studioName)
+    if variables:
+        result = run_query(query, variables)
+        if not result:
+            await ctx.send("There does not exist a studio with a name of {}.".format(studioName))
+            return
+
+        embed = discord.Embed(
+            colour=discord.Colour.purple(),
+            title=result["data"]["Studio"]["name"],
+            url=result["data"]["Studio"]["siteUrl"]
+        )
+        studioShows = ""
+
+        for show in result["data"]["Studio"]["media"]["nodes"]:
+            studioShows += '[{} ({})]({})'.format((show["title"]["romaji"]), (show["title"]["english"]), show["siteUrl"]) + "\n\n"
+        embed.add_field(name = "Anime produced by {}".format(result["data"]["Studio"]["name"]), value=studioShows)
+
+        await ctx.send(embed=embed)
 
 client.run('')
