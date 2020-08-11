@@ -10,10 +10,10 @@ Features:
 - [x] Display a user's favourites
 - [x] Display the top 10 anime of a studio
 - [ ] Search by character
-- [ ] Search by staff
+- [x] Search by staff
 - [ ] Improve appearance of commands
 - [ ] Search ??? by ???
-- [ ] Refactor code
+- [x] Refactor code
 
 To Do:
 - [ ] Making this look good
