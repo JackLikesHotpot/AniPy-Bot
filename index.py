@@ -3,6 +3,7 @@ from commands.searchAnime import animeSearch
 from commands.reverseSearch import reverseSearch
 from commands.searchManga import mangaSearch
 from commands.searchStudio import studioSearch
+from commands.searchStaff import staffSearch
 from misc.help import helpMessage
 from misc.checkUser import checkUser
 from commands.searchUser import *
@@ -63,5 +64,9 @@ async def user(ctx, *, userName):
 @client.command(aliases=['STUDIO', 's'])
 async def studio(ctx, *, studioName):
     await ctx.send(embed=studioSearch(studioName))
+
+@client.command(aliases=['STAFF', 'st'])
+async def staff(ctx, *, staffName):
+    await ctx.send(embed=staffSearch(staffName))
 
 client.run('')
