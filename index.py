@@ -1,11 +1,12 @@
+from discord import HTTPException
 from discord.ext import commands
 from commands.searchAnime import animeSearch
 from commands.reverseSearch import reverseSearch
 from commands.searchManga import mangaSearch
 from commands.searchStudio import studioSearch
 from commands.searchStaff import staffSearch
+from commands.searchCharacter import charSearch
 from misc.help import helpMessage
-from misc.checkUser import checkUser
 from commands.searchUser import *
 
 client = commands.Bot(command_prefix='!')
@@ -40,33 +41,60 @@ async def help(ctx):
 
 @client.command(aliases=["ANIME", "a"])
 async def anime(ctx, *, title):
-    await ctx.send(embed=animeSearch(title))
+    embed = animeSearch(title)
+    await ctx.send(embed=embed)
 
 
 @client.command(aliases=["MANGA", "m"])
 async def manga(ctx, *, title):
-    await ctx.send(embed=mangaSearch(title))
+    embed = mangaSearch(title)
+    await ctx.send(embed=embed)
 
 
 @client.command(aliases=['REVERSE', 'r'])
 async def reverse(ctx, *, link):
-    await ctx.send(embed=animeSearch(title=str(reverseSearch(link))))
+    title = str(reverseSearch(link))
+    if not title:
+        await ctx.send(discord.Embed(description="Image is malformed or something went wrong."))        ##########################################
+    else:
+        await ctx.send(embed=animeSearch(title=str(reverseSearch(link))))
 
 
 @client.command(aliases=['USER', 'u'])
 async def user(ctx, *, userName):
-    if checkUser(userName):
-        result = generateUserInfo(userName)
-        await ctx.send(embed=userSearch(result))
-        await ctx.send(embed=userAnime(result))
-        await ctx.send(embed=userManga(result))
+    result = generateUserInfo(userName)
+    if result:
+        try:
+            userEmbed = userSearch(result)
+            await ctx.send(embed=userEmbed)
+
+            userAnimeEmbed = userAnime(result)
+            await ctx.send(embed=userAnimeEmbed)
+
+            userMangaEmbed = userManga(result)
+            await ctx.send(embed=userMangaEmbed)
+        except HTTPException:
+            pass
+    else:
+        await ctx.send(embed=userError(userName))
+
 
 @client.command(aliases=['STUDIO', 's'])
 async def studio(ctx, *, studioName):
-    await ctx.send(embed=studioSearch(studioName))
+    embed = studioSearch(studioName)
+    await ctx.send(embed=embed)
+
 
 @client.command(aliases=['STAFF', 'st'])
 async def staff(ctx, *, staffName):
-    await ctx.send(embed=staffSearch(staffName))
+    embed = staffSearch(staffName)
+    await ctx.send(embed=embed)
+
+
+@client.command(aliases=["CHARACTER", 'ch', 'char'])
+async def character(ctx, *, charName):
+    embed = charSearch(charName)
+    await ctx.send(embed=embed)
+
 
 client.run('')
