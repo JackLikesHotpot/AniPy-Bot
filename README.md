@@ -23,4 +23,5 @@ To Do:
 - [ ] 'How to run this locally' guide
 - [ ] Check if image link is a .png/.jpg
 - [ ] Reorganise error embeds into other functions?
+- [ ] Number of Chapters/Volumes should be N/A and not None
 - [x] Regret not using GitHub properly
