@@ -17,7 +17,7 @@ def animeSearch(title):
     if variables:
         result = run_query(query, variables)
         if not result:
-            return "There does not exist an anime with a title/ID of {}.".format(title)
+            return discord.Embed(description="There does not exist an anime with a title/ID of {}.".format(title))
 
         embed = discord.Embed(
             colour=discord.Colour.blue(),

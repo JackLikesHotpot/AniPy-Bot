@@ -9,7 +9,7 @@ def staffSearch(staffName):
     if variables:
         result = run_query(query, variables)
         if not result:
-            return "There does not exist a person with the name {}.".format(staffName)
+            return discord.Embed(description="There does not exist a person with the name {}.".format(staffName))
 
         embed = discord.Embed(
             colour=discord.Colour.dark_orange(),

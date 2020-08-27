@@ -4,6 +4,10 @@ from queries.userQuery import SearchUser
 from queries.runQuery import run_query
 from variables.userVar import GetUser
 
+def userError(userName):
+    return discord.Embed(description="There does not exist a user with the name of {}.".format(userName))
+
+
 def generateUserInfo(userName):
     result = run_query(SearchUser(), GetUser(userName))
     return result
@@ -34,29 +38,31 @@ def userSearch(result):
 
 def userAnime(result):
 
+    aniFav = result["data"]["User"]["favourites"]["anime"]["nodes"]
     embedAni = discord.Embed(
         colour=discord.Colour.red()
     )
 
-    animeFav = ""
-
-    for fav in result["data"]["User"]["favourites"]["anime"]["nodes"]:
-        animeFav += '[{} ({})]({})'.format((fav["title"]["romaji"]), (fav["title"]["english"]), fav["siteUrl"]) + "\n\n"
-    embedAni.add_field(name=("{}'s Favourite Anime".format(result["data"]["User"]["name"])), value=animeFav)
-    embedAni.set_thumbnail(url=result["data"]["User"]["avatar"]["large"])
+    favs = ""
+    if aniFav:
+        for fav in result["data"]["User"]["favourites"]["anime"]["nodes"]:
+            favs += '[{} ({})]({})'.format((fav["title"]["romaji"]), (fav["title"]["english"]), fav["siteUrl"]) + "\n\n"
+        embedAni.add_field(name=("{}'s Favourite Anime".format(result["data"]["User"]["name"])), value=favs)
+        embedAni.set_thumbnail(url=result["data"]["User"]["avatar"]["large"])
     return embedAni
 
 
 def userManga(result):
 
+    manFav = result["data"]["User"]["favourites"]["manga"]["nodes"]
     embedMan = discord.Embed(
         colour=discord.Colour.red()
     )
 
-    mangaFav = ""
-
-    for fav in result["data"]["User"]["favourites"]["manga"]["nodes"]:
-        mangaFav += '[{} ({})]({})'.format((fav["title"]["romaji"]), (fav["title"]["english"]), fav["siteUrl"]) + "\n\n"
-    embedMan.add_field(name=("{}'s Favourite Manga".format(result["data"]["User"]["name"])), value=mangaFav)
-    embedMan.set_thumbnail(url=result["data"]["User"]["avatar"]["large"])
-    return embedMan
+    favs = ""
+    if manFav:
+        for fav in result["data"]["User"]["favourites"]["manga"]["nodes"]:
+            favs += '[{} ({})]({})'.format((fav["title"]["romaji"]), (fav["title"]["english"]), fav["siteUrl"]) + "\n\n"
+        embedMan.add_field(name=("{}'s Favourite Manga".format(result["data"]["User"]["name"])), value=favs)
+        embedMan.set_thumbnail(url=result["data"]["User"]["avatar"]["large"])
+        return embedMan

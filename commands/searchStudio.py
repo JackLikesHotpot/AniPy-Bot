@@ -10,7 +10,7 @@ def studioSearch(studioName):
     if variables:
         result = run_query(query, variables)
         if not result:
-            return "There does not exist a studio with a name of {}.".format(studioName)
+            return discord.Embed(description="There does not exist a studio with a name of {}.".format(studioName))
 
         embed = discord.Embed(
             colour=discord.Colour.purple(),
