@@ -13,6 +13,9 @@ You can search for anime/manga titles, users, reverse image anime pictures, and 
 * Search by staff
 * Search by studio
 
+# Example Use
+![Example](https://i.imgur.com/S9Wjm4p.png)
+
 # Requirements:
 * Python 3.6.5+
 * A Discord Developer Account
