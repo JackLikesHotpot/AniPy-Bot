@@ -8,15 +8,10 @@ from commands.searchStaff import staffSearch
 from commands.searchCharacter import charSearch
 from misc.help import helpMessage
 from commands.searchUser import *
+from config import token
 
 client = commands.Bot(command_prefix='!')
 client.remove_command('help')
-
-
-def removeTags(text):
-    import re
-    clean = re.compile('<.*?>')
-    return re.sub(clean, '', text)
 
 
 @client.event
@@ -53,11 +48,10 @@ async def manga(ctx, *, title):
 
 @client.command(aliases=['REVERSE', 'r'])
 async def reverse(ctx, *, link):
-    title = str(reverseSearch(link))
-    if not title:
-        await ctx.send(discord.Embed(description="Image is malformed or something went wrong."))        ##########################################
-    else:
+    if link.endswith(".jpg") or link.endswith(".png") or link.endswith(".jpeg"):
         await ctx.send(embed=animeSearch(title=str(reverseSearch(link))))
+    else:
+        await ctx.send(embed=discord.Embed(description="Link is not a .jpg or a .png file."))
 
 
 @client.command(aliases=['USER', 'u'])
@@ -73,6 +67,7 @@ async def user(ctx, *, userName):
 
             userMangaEmbed = userManga(result)
             await ctx.send(embed=userMangaEmbed)
+
         except HTTPException:
             pass
     else:
@@ -97,4 +92,4 @@ async def character(ctx, *, charName):
     await ctx.send(embed=embed)
 
 
-client.run('')
+client.run(token)
