@@ -8,9 +8,9 @@ from commands.searchStaff import staffSearch
 from commands.searchCharacter import charSearch
 from misc.help import helpMessage
 from commands.searchUser import *
-from config import token
+from config import token, prefix
 
-client = commands.Bot(command_prefix='!')
+client = commands.Bot(command_prefix=prefix)
 client.remove_command('help')
 
 
