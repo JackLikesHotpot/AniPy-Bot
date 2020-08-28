@@ -8,8 +8,8 @@ def SearchUser():
         avatar {
             large
         }
-        favourites {                                #print out favourites
-            anime (perPage: 10) {
+        favourites {                             
+            anime (perPage: 5) {
                 nodes {
                 siteUrl
                     title {
@@ -18,7 +18,7 @@ def SearchUser():
                     }
                 }
             }
-            manga (perPage: 10) {
+            manga (perPage: 5) {
                 nodes {
                 siteUrl
                     title {
