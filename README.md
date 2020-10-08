@@ -1,5 +1,5 @@
 # AniPy Bot
-A Discord bot that uses the AniList GraphIQL API, coded in Python. 
+A Discord bot that uses the AniList GraphQL API, coded in Python. 
 You can search for anime/manga titles, users, reverse image anime pictures, and more.
 
 # Features:
