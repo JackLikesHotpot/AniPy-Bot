@@ -2,6 +2,10 @@
 A Discord bot that uses the AniList GraphQL API, coded in Python. 
 You can search for anime/manga titles, users, reverse image anime pictures, and more.
 
+# Disclaimer
+Just pushed up a change (05/01/22) to fix a problem caused by tracemoepy at v4.1.
+**Don't think I plan to return to this project again.** Code is somewhat poor and only reflective of my skills in Aug 2020.
+
 # Features:
 * Search anime by title/ID
 * Search manga by title/ID
