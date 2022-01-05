@@ -4,7 +4,10 @@ You can search for anime/manga titles, users, reverse image anime pictures, and 
 
 # Disclaimer
 Just pushed up a change (05/01/22) to fix a problem caused by tracemoepy at v4.1.
-**Don't think I plan to return to this project again.** Code is somewhat poor and only reflective of my skills in Aug 2020.
+
+**Don't think I plan to return to this project again.**
+
+Code is somewhat poor and only reflective of my skills in Aug 2020.
 
 # Features:
 * Search anime by title/ID
