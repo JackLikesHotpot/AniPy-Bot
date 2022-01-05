@@ -49,7 +49,12 @@ async def manga(ctx, *, title):
 @client.command(aliases=['REVERSE', 'r'])
 async def reverse(ctx, *, link):
     if link.endswith(".jpg") or link.endswith(".png") or link.endswith(".jpeg"):
-        await ctx.send(embed=animeSearch(title=str(reverseSearch(link))))
+        ani_id = reverseSearch(link)
+        if ani_id is None:
+            await ctx.send(embed=discord.Embed(
+                description='The image searched does not belong to an anime, or has a a similarity rating of less than 0.9.'))
+        else:
+            await ctx.send(embed=animeSearch(title=str(ani_id)))
     else:
         await ctx.send(embed=discord.Embed(description="Link is not a .jpg or a .png file."))
 
