@@ -10,15 +10,15 @@ Just pushed up a change (05/01/22) to fix a problem caused by tracemoepy at v4.1
 Code is somewhat poor and only reflective of my skills in Aug 2020.
 
 # Features:
-* Search anime by title/ID
-* Search manga by title/ID
-* Reverse image search anime by image link
-* Search user by name
+* !a <anime_name> - Search anime by title/ID
+* !m <manga_name> - Search manga by title/ID
+* !r <link> Reverse image search anime by image link
+* !u <user_name> Search user by name
 * Display a user's favourites
 * Display the top 5 anime of a studio
-* Search by character
-* Search by staff
-* Search by studio
+* !ch <character_name> Search by character
+* !st <staff_name> Search by staff
+* !s <studio_name> Search by studio
 
 # Example Use
 ![Example](https://i.imgur.com/S9Wjm4p.png)
