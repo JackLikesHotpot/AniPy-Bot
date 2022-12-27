@@ -2,25 +2,17 @@
 A Discord bot that uses the AniList GraphQL API, coded in Python. 
 You can search for anime/manga titles, users, reverse image anime pictures, and more.
 
-# Disclaimer
-
-**Currently incompatible with Slash Commands, and will probably just rewrite this project in JS instead.**
-
-Code is somewhat poor and only reflective of my skills in Aug 2020.
-
 # Features:
-* !a <anime_name> - Search anime by title/ID
-* !m <manga_name> - Search manga by title/ID
-* !r <link> Reverse image search anime by image link
-* !u <user_name> Search user by name
-* Display a user's favourites
-* Display the top 5 anime of a studio
-* !ch <character_name> Search by character
-* !st <staff_name> Search by staff
-* !s <studio_name> Search by studio
+* /anime <anime name>- Search anime by title/ID
+* /manga <manga name> - Search manga by title/ID
+* /reverse <link> Reverse image search anime by image link
+* /user <anilist username> Search user by name
+* /character <character name> Search by character
+* /staff <staff name> Search by staff
+* /studio <studio name> Search by studio
 
 # Example Use
-![Example](https://i.imgur.com/S9Wjm4p.png)
+![Example](https://i.imgur.com/PIDSrAg.png)
 
 # Requirements:
 * Python 3.6.5+
@@ -35,7 +27,7 @@ Code is somewhat poor and only reflective of my skills in Aug 2020.
 6. Execute the bot with `python index.py`.
 
 # Configuration:
-* You can edit the command prefix in `config.py`.
+* You can edit the bot's token in `config.py`.
 
 # License:
-MIT © xjl98 
+MIT © JackLikesHotpot 
