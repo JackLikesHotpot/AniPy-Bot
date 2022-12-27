@@ -4,7 +4,7 @@ You can search for anime/manga titles, users, reverse image anime pictures, and 
 
 # Disclaimer
 
-**Currently incompatible with Slash Commands, and will probably just rewrite this project in JS instead.*
+**Currently incompatible with Slash Commands, and will probably just rewrite this project in JS instead.**
 
 Code is somewhat poor and only reflective of my skills in Aug 2020.
 
