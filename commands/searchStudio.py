@@ -20,6 +20,6 @@ def studioSearch(studioName):
         studioShows = ""
 
         for show in result["data"]["Studio"]["media"]["nodes"]:
-            studioShows += '[{} ({})]({})'.format((show["title"]["romaji"]), (show["title"]["english"]), show["siteUrl"]) + "\n\n"
+            studioShows += '[{} ({})]({})\n'.format((show["title"]["romaji"]), (show["title"]["english"]), show["siteUrl"])
         embed.add_field(name = "Anime produced by {}".format(result["data"]["Studio"]["name"]), value=studioShows)
         return embed
