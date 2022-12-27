@@ -20,7 +20,7 @@ def staffSearch(staffName):
         characters = ""
 
         for char in result["data"]["Staff"]["characters"]["edges"]:
-            characters += '[{}]({})'.format(char["node"]['name']['full'], char["node"]["siteUrl"]) + '\n\n'
+            characters += '[{}]({})'.format(char["node"]['name']['full'], char["node"]["siteUrl"]) + '\n'
         embed.add_field(name="Character List", value=characters)
         embed.set_thumbnail(url=result["data"]["Staff"]["image"]["large"])
         return embed
